@@ -1,0 +1,16 @@
+DESCRIPTION
+Use these files with your implementation MyString.cpp to test your code.
+You can use your MyString.h file, but you will need to copy all the lines
+that "friend" my test classes as you will see in the MyString.h file
+provided here.
+
+USAGE
+Compile the code and simply execute the program. The program will write the
+results to results.txt. If a test passed, the test number will be written to
+results.txt, otherwise a 0 will be written. If your code seg faults or
+crashes, you can select which test case to run very easily from the main().
+All the if statements have an assignment inside, e.g., if(test = 1), which
+will set test to 1 and will cause the condition to evaluate to true. If you
+want to disable certain tests, write if(test == 1) instead and set the test
+variable to the desired value.
+

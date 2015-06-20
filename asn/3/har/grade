@@ -1,0 +1,131 @@
+#!/bin/bash
+
+# CONSTANTS
+
+USER=cassej
+STUDENTID=${PWD##/*/}
+PROGRAM=a.out
+OUTPUTFILE=$STUDENTID.txt
+STDERR=stderr
+STDOUT=stdout
+STATUS=status.txt
+ASSN="CS014_Assignment_3"
+TEST_N=( 8 9 10 11 12 13 14 15 20 21 22 28 29 30 31 32 33 34 35 40 41 42 43 44 45 46 47 48 49 )
+POINTS=( 3 3  3  3  3  3  3  3  4  4  4  3  3  3  3  3  3  3  3  4  4  4  4  4  4  4  4  4  4 )
+TEST_NAMES=(
+"SortedArrayList insert (word ends up in first location)"
+"SortedArrayList insert (word ends up in middle location)"
+"SortedArrayList insert (word ends up in last location)"
+"SortedArrayList remove (first word)"
+"SortedArrayList remove (middle word)"
+"SortedArrayList remove (last word)"
+"SortedArrayList find (word in list)"
+"SortedArrayList find (word not in list)"
+"SortedArrayList timing (insert)"
+"SortedArrayList timing (find)"
+"SortedArrayList timing (remove)"
+"SortedLinkedList insert (word ends up in first location)"
+"SortedLinkedList insert (word ends up in middle location)"
+"SortedLinkedList insert (word ends up in last location)"
+"SortedLinkedList remove (first word)"
+"SortedLinkedList remove (middle word)"
+"SortedLinkedList remove (last word)"
+"SortedLinkedList find (word in list)"
+"SortedLinkedList find (word not in list)"
+"SortedLinkedList timing (insert)"
+"SortedLinkedList timing (find)"
+"SortedLinkedList timing (remove)"
+"less_than (equal strings)"
+"less_than (different strings, return false)"
+"less_than (different strings, return true)"
+"SortedArrayList batch(insert)"
+"SortedArrayList batch(remove)"
+"SortedLinkedList batch(insert)"
+"SortedLinkedList batch(remove)"
+)
+
+# VARIABLES
+
+score=0
+
+# HEADING
+
+echo "Assignment: "$ASSN                                                               > $OUTPUTFILE
+echo "Username:   "$STUDENTID                                                         >> $OUTPUTFILE
+echo                                                                                  >> $OUTPUTFILE
+
+echo $ASSN Standard Output Log                                                         > $STDOUT
+echo                                                                                  >> $STDOUT
+
+echo $ASSN Standard Error Log                                                          > $STDERR
+echo                                                                                  >> $STDERR
+
+# EXECUTE TESTS
+
+for i in {0..28}
+do
+
+# TEST HEADING
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $OUTPUTFILE
+echo ------                                                                           >> $OUTPUTFILE
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $STDOUT
+echo ------                                                                           >> $STDOUT
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $STDERR
+echo ------                                                                           >> $STDERR
+
+# EXECUTE TEST
+
+( ./execute $PROGRAM ${TEST_N[i]} $STDOUT $STDERR $STATUS &> /dev/null) &
+
+# CHECK RESULTS
+
+# check infinite loop or taking too long
+TIMEOUT=1s
+if [ "${TEST_N[i]}" == "20" ]; then TIMEOUT=2s; fi
+if [ "${TEST_N[i]}" == "21" ]; then TIMEOUT=2s;  fi
+if [ "${TEST_N[i]}" == "22" ]; then TIMEOUT=2s;  fi
+if [ "${TEST_N[i]}" == "40" ]; then TIMEOUT=2s; fi
+if [ "${TEST_N[i]}" == "41" ]; then TIMEOUT=2s;  fi
+if [ "${TEST_N[i]}" == "42" ]; then TIMEOUT=2s;  fi
+if [ "${TEST_N[i]}" == "46" ]; then TIMEOUT=2s; fi
+if [ "${TEST_N[i]}" == "47" ]; then TIMEOUT=2s;  fi
+if [ "${TEST_N[i]}" == "48" ]; then TIMEOUT=2s; fi
+if [ "${TEST_N[i]}" == "49" ]; then TIMEOUT=2s;  fi
+sleep $TIMEOUT
+pid=$(ps -o pid,args -u $USER | grep $PROGRAM | grep -v grep | cut -c1-6)
+if [ "$pid" != "" ]; then
+  echo "Program timed out."                                                           >> $OUTPUTFILE
+  kill $pid > /dev/null 2> /dev/null
+else
+  # read result file created by the test program a.out
+  read val < result.txt
+  rm -f result.txt
+  # if test program did not output to output file, then it crashed or seg faulted
+  if [ "$val" == "" ]; then
+    read status < status.txt
+    if [ "$status" == "139" ]; then
+      echo "Segmentation faul"                                                        >> $OUTPUTFILE
+    else
+      echo "Test error."                                                         >> $OUTPUTFILE
+    fi
+  # if test program returned 0 points, then the test failed
+  elif [ "$val" == "0" ]; then
+    echo fail                                                                         >> $OUTPUTFILE
+  # check that we are running the right test
+  elif [ "$val" == "${TEST_N[i]}" ]; then
+    echo pass                                                                         >> $OUTPUTFILE
+    score=$((score+${POINTS[$i]}))
+  else
+    echo Test Error                                                                   >> $OUTPUTFILE
+  fi
+fi
+
+echo                                                                                  >> $OUTPUTFILE
+
+done
+
+echo Total Score: $score                                                              >> $OUTPUTFILE
+echo                                                                                  >> $OUTPUTFILE

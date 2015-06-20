@@ -1,0 +1,47 @@
+// Course: CS 14 Spring 2012
+//
+// First Name: Samuel
+// Last Name: Villarreal
+// UCR Username: svill017
+// UCR Email Address: svill017@student.ucr.edu
+//
+// Lecture Section: 001
+// Lab Section: 022
+// TA: Krystof Litomisk
+//
+// Assignment: lab 8
+//
+// I hereby certify that the code in this file
+// is ENTIRELY my own original work.
+//
+// ===========================================================================
+
+problem 1 : there was a seg fault in the remove function. had to run the 
+program in gdb. Then used the backtrace command to figure out in which function
+the error was and the value passed in using the x command. The problem happens
+to be
+  marker = 0; 
+  ~deleted
+followed by trying to access that marker
+
+problem 2: the extra node is added because the user fails to set the rest of
+the List properly.Instead of having the temp->next = marker next they make it 
+point to a new node. This was easily found using step command to follow the 
+code.
+
+  head_ = new Node<T>(marker->value(), marker->next());
+  
+changed to:
+
+  head_ = marker->next;
+
+problem 3:the memory leak comes from deleteing the wrong pointer
+  delete temp;
+this is the problems because the value that needs to be deleted is actually 
+pointed at by the marker. Also found using the break;condition; then steps.
+
+delete temp;
+
+changed to:
+
+delete marker;

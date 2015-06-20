@@ -1,0 +1,12 @@
+a.out Standard Error Log
+
+Test #1 Default Constructor (5 points)
+------
+Test #2 Copy Constructor (empty tree) (5 points)
+------
+Test #3 Copy Constructor (filled tree) (5 points)
+------
+Test #4 Destructor (5 points)
+------
+Test #5 Assignment Operator (empty tree) (5 points)
+------

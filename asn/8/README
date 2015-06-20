@@ -1,0 +1,20 @@
+DESCRIPTION
+-----------
+
+Implement Dijkstra's algorithm in the file Dijkstra.h.
+
+USAGE
+-----
+
+1. Extract the files onto an empty directory, and implement Dijkstra's
+   Dijkstra's algorithm inside Dijkstra.h.
+
+2. Compile the code by typing make in the terminal; this will use the Makefile
+   provided to compile and link your code with necessary libraries.
+
+3. Run tests individually by typing a.out and the test number.
+   For example,
+     $ a.out 1
+   executes test #1 (the $ is the terminal prompt). When you run it like this,
+   the result of the run is in result.txt. If the test passed, the test number
+   is printed to result.txt, otherwise a 0 is printed.

@@ -1,0 +1,18 @@
+// Course: CS 14 Spring 2012
+//
+// First Name: Samuel
+// Last Name: Villarreal
+// UCR Username: svill017
+// UCR Email Address: svill017@student.ucr.edu
+//
+// Lecture Section: 001
+// Lab Section: 022
+// TA: Krystof Litomisk
+//
+// Assignment: assignment 2
+//
+// I hereby certify that the code in this file
+// is ENTIRELY my own original work.
+//
+// ===========================================================================
+if there is alot more numbers greater than the key lazy becomes faster because it doesn't go through all of them while regular just keeps checking regardless

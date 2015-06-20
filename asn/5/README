@@ -1,0 +1,44 @@
+DESCRIPTION
+-----------
+
+Use the included files in conjunction with your files:
+
+AvlTree.h
+AlvTree.cpp
+
+USAGE
+-----
+
+1. Extract the files into an empty directory, and include your files.
+
+2. Place the follwing "frined" lines just after the class declaration as shown below.
+
+class AvlTree
+{
+  friend struct test_tree_t;
+  friend struct test_1;
+  friend struct test_2_3;
+  friend struct test_4;
+  friend struct test_5_6;
+  friend struct test_7_8;
+  friend struct test_9;
+  friend struct test_10_15;
+  friend struct test_16_20;
+
+public:
+...
+
+3. Compile the code by typing make in the terminal; this will use the Makefile
+   provided to compile and link your code with necessary libraries.
+
+4. Execute the test script by typing ./grade in the terminal. The grading
+   script will execute all test cases, one by one, and output the results
+   to a file named <your current working directory>.txt. There are 20 tests
+   total. The total running time of the testing script is about 20 seconds.
+
+   You can also run tests individually by typing a.out and the test number.
+   For example,
+     $ a.out 1
+   executes test #1 (the $ is the terminal prompt). When you run it like this,
+   the result of the run is in result.txt. If the test passed, the test number
+   is printed to result.txt, otherwise a 0 is printed.

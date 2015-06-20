@@ -1,0 +1,50 @@
+a.out Standard Error Log
+
+Test #1 LinkedStack is_balanced '()' (5 points)
+------
+Test #2 LinkedStack is_balanced '(()' (5 points)
+------
+Test #3 LinkedStack is_balanced '())' (5 points)
+------
+Test #4 LinkedStack is_balanced '(())' (5 points)
+------
+Test #5 ArrayStack is_empty (true) (1 points)
+------
+Test #6 LinkedStack is_empty (true) (1 points)
+------
+Test #7 ArrayQueue is_empty (true) (1 points)
+------
+Test #8 LinkedQueue is_empty (true) (1 points)
+------
+Test #9 ArrayStack is_empty (false) (2 points)
+------
+Test #10 LinkedStack is_empty (false) (2 points)
+------
+Test #11 ArrayQueue is_empty (false) (2 points)
+------
+Test #12 LinkedQueue is_empty (false) (2 points)
+------
+Test #13 ArrayStack is_full (false) (2 points)
+------
+Test #14 LinkedStack is_full (false) (2 points)
+------
+Test #15 ArrayQueue is_full (false) (2 points)
+------
+Test #16 LinkedQueue is_full (false) (2 points)
+------
+Test #17 ArrayStack Underflow Exception (5 points)
+------
+Test #18 LinkedStack Underflow Exception (5 points)
+------
+Test #19 ArrayQueue Underflow Exception (5 points)
+------
+Test #20 LinkedQueue Underflow Exception (5 points)
+------
+Test #21 ArayStack fill_all / empty_all (10 points)
+------
+Test #22 LinkedStack fill_all / empty_all (10 points)
+------
+Test #23 ArayQueue fill_all / empty_all (10 points)
+------
+Test #24 LinkedQueue fill_all / empty_all (10 points)
+------

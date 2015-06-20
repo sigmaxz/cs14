@@ -1,0 +1,34 @@
+DESCRIPTION
+-----------
+
+Use the included files in conjunction with your files:
+
+SortedList.h
+SortedList.cpp
+SortedArrayList.cpp
+SortedLinkedList.cpp
+
+USAGE
+-----
+
+1. Extract the files into an empty directory, and include your files.
+
+2. Compile the code by typing make in the terminal; this will use the Makefile
+   provided to compile and link your code with necessary libraries.
+
+3. Execute the test script by typing ./grade in the terminal. The grading
+   script will execute all test cases, one by one, and output the results
+   to a file named <your current working directory>.txt. There are 29 tests
+   total (the test nummbers are not consecutive). Some will take longer than
+   others. The total running time of the testing script is just under 20
+   minutes. This means that you cannot run it from well or bass because the
+   servers will kill any process running longer than 5 minutes. You need to
+   run it from a lab machine.
+
+   You can also run tests individually by typing a.out and the test number.
+   For example,
+     $ a.out 1
+   executes test #1 (the $ is the terminal prompt). When you run it like this,
+   the result of the run is in result.txt. If the test passed, the test number
+   is printed to result.txt, otherwise a 0 is printed.
+

@@ -1,0 +1,8 @@
+exercise 1:
+		One subset will be called m. the next subset would logically be n-m since n is the total number of vertices. so to get the max number of possible edges we use m * (n-m). Distribute out so you can take the derivative with respect to m  funtion mn - m^2 direvative equates to n - 2m. We use the derivative because it is a representation of the slope at any give point of the function. Second derivative test then proves that it is < 0 so it is a maxima. Set to zero we would get m = n/2 then plugging back in get n/2 - n^2/4 the larger being n^2/4.
+
+
+
+
+exercise 2: 
+		To begin if there are sides u and *a with |*a| = 1 you have a bipartite although on side remains empty, *a has a head. So a + v ( a leaf) would still be a bipartie as long as they are in different subsets. So as you have new v you put them onto the oppisite side of their parents.So you have connections only from one subset to the other. 

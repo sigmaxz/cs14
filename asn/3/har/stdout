@@ -1,0 +1,65 @@
+CS014_Assignment_3 Standard Output Log
+
+Test #8 SortedArrayList insert (word ends up in first location) (3 points)
+------
+Test #9 SortedArrayList insert (word ends up in middle location) (3 points)
+------
+Test #10 SortedArrayList insert (word ends up in last location) (3 points)
+------
+Test #11 SortedArrayList remove (first word) (3 points)
+------
+Test #12 SortedArrayList remove (middle word) (3 points)
+------
+Test #13 SortedArrayList remove (last word) (3 points)
+------
+Test #14 SortedArrayList find (word in list) (3 points)
+------
+Test #15 SortedArrayList find (word not in list) (3 points)
+------
+Test #20 SortedArrayList timing (insert) (4 points)
+------
+array insert 0.14
+Test #21 SortedArrayList timing (find) (4 points)
+------
+array find 0.01
+Test #22 SortedArrayList timing (remove) (4 points)
+------
+array remove 0.03
+Test #28 SortedLinkedList insert (word ends up in first location) (3 points)
+------
+Test #29 SortedLinkedList insert (word ends up in middle location) (3 points)
+------
+Test #30 SortedLinkedList insert (word ends up in last location) (3 points)
+------
+Test #31 SortedLinkedList remove (first word) (3 points)
+------
+Test #32 SortedLinkedList remove (middle word) (3 points)
+------
+Test #33 SortedLinkedList remove (last word) (3 points)
+------
+Test #34 SortedLinkedList find (word in list) (3 points)
+------
+Test #35 SortedLinkedList find (word not in list) (3 points)
+------
+Test #40 SortedLinkedList timing (insert) (4 points)
+------
+Test #41 SortedLinkedList timing (find) (4 points)
+------
+linked-list find 0.02
+Test #42 SortedLinkedList timing (remove) (4 points)
+------
+linked-list remove 0.01
+Test #43 less_than (equal strings) (4 points)
+------
+Test #44 less_than (different strings, return false) (4 points)
+------
+Test #45 less_than (different strings, return true) (4 points)
+------
+Test #46 SortedArrayList batch(insert) (4 points)
+------
+Test #47 SortedArrayList batch(remove) (4 points)
+------
+Test #48 SortedLinkedList batch(insert) (4 points)
+------
+Test #49 SortedLinkedList batch(remove) (4 points)
+------

@@ -1,0 +1,8 @@
+ice
+fire
+element
+duck
+cart
+car
+ball
+air

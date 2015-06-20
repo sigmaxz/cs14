@@ -1,0 +1,175 @@
+#!/bin/bash
+
+# CONSTANTS
+
+USER=cassej
+STUDENTID=${PWD##/*/}
+PROGRAM=a.out
+OUTPUTFILE=$STUDENTID.txt
+STDERR=stderr
+STDOUT=stdout
+STATUS=status.txt
+ASSN=$1
+TEST_N=( 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 )
+POINTS=( 5  5  5  5  1  1  1  1  2  2  2  2  2  2  2  2  5  5  5  5 10 10 10 10 )
+TEST_NAMES=(
+"LinkedStack is_balanced '()'"
+"LinkedStack is_balanced '(()'"
+"LinkedStack is_balanced '())'"
+"LinkedStack is_balanced '(())'"
+"ArrayStack is_empty (true)"
+"LinkedStack is_empty (true)"
+"ArrayQueue is_empty (true)"
+"LinkedQueue is_empty (true)"
+"ArrayStack is_empty (false)"
+"LinkedStack is_empty (false)"
+"ArrayQueue is_empty (false)"
+"LinkedQueue is_empty (false)"
+"ArrayStack is_full (false)"
+"LinkedStack is_full (false)"
+"ArrayQueue is_full (false)"
+"LinkedQueue is_full (false)"
+"ArrayStack Underflow Exception"
+"LinkedStack Underflow Exception"
+"ArrayQueue Underflow Exception"
+"LinkedQueue Underflow Exception"
+"ArayStack fill_all / empty_all"
+"LinkedStack fill_all / empty_all"
+"ArayQueue fill_all / empty_all"
+"LinkedQueue fill_all / empty_all"
+)
+
+# VARIABLES
+
+score=0
+timeout=1s
+
+# HEADING
+
+echo "Assignment: "$ASSN                                                               > $OUTPUTFILE
+echo "Username:   "$STUDENTID                                                         >> $OUTPUTFILE
+echo                                                                                  >> $OUTPUTFILE
+
+echo $ASSN Standard Output Log                                                         > $STDOUT
+echo                                                                                  >> $STDOUT
+
+echo $ASSN Standard Error Log                                                          > $STDERR
+echo                                                                                  >> $STDERR
+
+# EXECUTE TESTS
+
+for i in {0..19}
+do
+
+# TEST HEADING
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $OUTPUTFILE
+echo ------                                                                           >> $OUTPUTFILE
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $STDOUT
+echo ------                                                                           >> $STDOUT
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $STDERR
+echo ------                                                                           >> $STDERR
+
+# EXECUTE TEST
+
+( ./execute $PROGRAM ${TEST_N[i]} $STDOUT $STDERR $STATUS &> /dev/null) &
+
+# CHECK RESULTS
+
+# check infinite loop or taking too long
+
+sleep $timeout
+pid=$(ps -o pid,args -u $USER | grep $PROGRAM | grep -v grep | cut -c1-6)
+if [ "$pid" != "" ]; then
+  echo "Program timed out."                                                           >> $OUTPUTFILE
+  kill $pid > /dev/null 2> /dev/null
+else
+  # read result file created by the test program a.out
+  read val < result.txt
+  rm -f result.txt
+  # if test program did not output to output file, then it crashed or seg faulted
+  if [ "$val" == "" ]; then
+    read status < status.txt
+    if [ "$status" == "139" ]; then
+      echo "Segmentation faul"                                                        >> $OUTPUTFILE
+    else
+      echo "Program crash"                                                         >> $OUTPUTFILE
+    fi
+  # if test program returned 0 points, then the test failed
+  elif [ "$val" == "0" ]; then
+    echo fail                                                                         >> $OUTPUTFILE
+  # check that we are running the right test
+  elif [ "$val" == "${TEST_N[i]}" ]; then
+    echo pass                                                                         >> $OUTPUTFILE
+    score=$((score+${POINTS[$i]}))
+  else
+    echo Test error                                                                   >> $OUTPUTFILE
+  fi
+fi
+
+echo                                                                                  >> $OUTPUTFILE
+
+done
+
+# read_all / empty_all function tests
+
+OUTPUTFLE=( "ArrayStackOutput.txt" "LinkedStackOutput.txt" "ArrayQueueOutput.txt" "LinkedQueueOutput.txt" )
+OUTPUTKEY=( "StackOutputKey.txt" "StackOutputKey.txt" "QueueOutputKey.txt" "QueueOutputKey.txt" )
+tiimeout=3s
+
+for i in {20..23}
+do
+
+# TEST HEADING
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $OUTPUTFILE
+echo ------                                                                           >> $OUTPUTFILE
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $STDOUT
+echo ------                                                                           >> $STDOUT
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $STDERR
+echo ------                                                                           >> $STDERR
+
+# EXECUTE TEST
+
+( ./execute $PROGRAM ${TEST_N[i]} $STDOUT $STDERR $STATUS &> /dev/null) &
+
+# CHECK RESULTS
+
+# check infinite loop or taking too long
+sleep $timeout
+pid=$(ps -o pid,args -u $USER | grep $PROGRAM | grep -v grep | cut -c1-6)
+
+# evaluate
+if [ "$pid" != "" ]; then
+  echo "Program timed out."                                                           >> $OUTPUTFILE
+  kill $pid > /dev/null 2> /dev/null
+else
+  read status < status.txt
+  if [ "$status" != "0" ]; then
+    if [ "$status" == "139" ]; then
+      echo "Segmentation faul"                                                        >> $OUTPUTFILE
+    else
+      echo "Program crash"                                                         >> $OUTPUTFILE
+    fi
+  else
+    # run diff on output
+    diff ${OUTPUTKEY[$((i-20))]} ${OUTPUTFLE[$((i-20))]}
+    if [ "$?" == "0" ]; then
+      echo pass          >> $OUTPUTFILE
+      score=$((score+${POINTS[$i]}))
+    else
+      echo fail         >> $OUTPUTFILE
+    fi
+  fi
+fi
+
+echo                >> $OUTPUTFILE
+
+done
+
+echo Total Score: $score                    >> $OUTPUTFILE
+echo                                   >> $OUTPUTFILE

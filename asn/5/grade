@@ -1,0 +1,114 @@
+#!/bin/bash
+
+# CONSTANTS
+
+USER=cassej
+STUDENTID=${PWD##/*/}
+PROGRAM=a.out
+OUTPUTFILE=$STUDENTID.txt
+STDERR=stderr
+STDOUT=stdout
+STATUS=status.txt
+ASSN=$1
+TEST_N=( 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 )
+POINTS=( 5 5 5 5 5 5 5 5 5  5  5  5  5  5  5  5  5  5  5  5 )
+TEST_NAMES=(
+"Default Constructor"
+"Copy Constructor (empty tree)"
+"Copy Constructor (filled tree)"
+"Destructor"
+"Assignment Operator (empty tree)"
+"Assignment Operator (filled tree)"
+"Contains (word not in tree)"
+"Constais (word in tree)"
+"PrintTree (insert)"
+"Insert (into empty tree)"
+"Insert (no rotations required)"
+"Insert (single rotations only)"
+"Insert (double rotations only)"
+"Insert (single and double rotations)"
+"Insert (duplicates)"
+"Remove (leaf, without rotations)"
+"Remove (non-leaf, without rotations)"
+"Remove (leaf, with rotation)"
+"Remove (non-leaf, with rotation)"
+"Remove (duplicate)"
+)
+TIMEOUT=1s
+
+# VARIABLES
+
+score=0
+
+# HEADING
+
+echo "Assignment: "$ASSN                                                               > $OUTPUTFILE
+echo "Username:   "$STUDENTID                                                         >> $OUTPUTFILE
+echo                                                                                  >> $OUTPUTFILE
+
+echo $ASSN Standard Output Log                                                         > $STDOUT
+echo                                                                                  >> $STDOUT
+
+echo $ASSN Standard Error Log                                                          > $STDERR
+echo                                                                                  >> $STDERR
+
+# EXECUTE TESTS
+
+for i in {0..19}
+do
+
+# TEST HEADING
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $OUTPUTFILE
+echo ------                                                                           >> $OUTPUTFILE
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $STDOUT
+echo ------                                                                           >> $STDOUT
+
+echo Test "#${TEST_N[i]} ${TEST_NAMES[$i]}" '('"${POINTS[$i]}" points')'                >> $STDERR
+echo ------                                                                           >> $STDERR
+
+# EXECUTE TEST
+
+( ./execute $PROGRAM ${TEST_N[i]} $STDOUT $STDERR $STATUS &> /dev/null) &
+
+# CHECK RESULTS
+
+# check infinite loop or taking too long
+sleep $TIMEOUT
+pid=$(ps -o pid,args -u $USER | grep $PROGRAM | grep -v grep | cut -c1-6)
+if [ "$pid" != "" ]; then
+  echo "Program timed out."                                                           >> $OUTPUTFILE
+  kill $pid > /dev/null 2> /dev/null
+else
+  # read result file created by the test program a.out
+  read val < result.txt
+  rm -f result.txt
+  # if test program did not output to output file, then it crashed or seg faulted
+  if [ "$val" == "" ]; then
+    read status < status.txt
+    if [ "$status" == "139" ]; then
+      echo "Segmentation faul"                                                        >> $OUTPUTFILE
+    elif [ "$status" == "1" ]; then
+      echo "Bad test"                                                         >> $OUTPUTFILE
+    else
+      echo "Program crash"                                                         >> $OUTPUTFILE
+    fi
+  # if test program returned 0 points, then the test failed
+  elif [ "$val" == "0" ]; then
+    echo fail                                                                         >> $OUTPUTFILE
+  # check that we are running the right test
+  elif [ "$val" == "${TEST_N[i]}" ]; then
+    echo pass                                                                         >> $OUTPUTFILE
+    score=$((score+${POINTS[$i]}))
+  else
+    echo "Test error"                                                                   >> $OUTPUTFILE
+  fi
+fi
+
+echo                                                                                  >> $OUTPUTFILE
+
+done
+
+echo Total Score: $score                                                              >> $OUTPUTFILE
+echo                                                                                  >> $OUTPUTFILE

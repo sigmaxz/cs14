@@ -1,0 +1,5 @@
+strict graph sigraph {
+bob -- boy;
+boy -- bob -- toy; 
+toy -- boy;
+}

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PRGRAM=$1
+PARMTR=$2
+STDOUT=$3
+STDERR=$4
+STATUS=$5
+
+# execute with parameter $1 and redirect stdout and stderror
+$PRGRAM $PARMTR >> $STDOUT 2>> $STDERR
+
+# catch exit status
+echo $? > $STATUS

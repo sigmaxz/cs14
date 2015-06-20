@@ -1,0 +1,101 @@
+Assignment: a.out
+Username:   tar
+
+Test #1 LinkedStack is_balanced '()' (5 points)
+------
+pass
+
+Test #2 LinkedStack is_balanced '(()' (5 points)
+------
+pass
+
+Test #3 LinkedStack is_balanced '())' (5 points)
+------
+pass
+
+Test #4 LinkedStack is_balanced '(())' (5 points)
+------
+pass
+
+Test #5 ArrayStack is_empty (true) (1 points)
+------
+pass
+
+Test #6 LinkedStack is_empty (true) (1 points)
+------
+pass
+
+Test #7 ArrayQueue is_empty (true) (1 points)
+------
+pass
+
+Test #8 LinkedQueue is_empty (true) (1 points)
+------
+pass
+
+Test #9 ArrayStack is_empty (false) (2 points)
+------
+pass
+
+Test #10 LinkedStack is_empty (false) (2 points)
+------
+pass
+
+Test #11 ArrayQueue is_empty (false) (2 points)
+------
+pass
+
+Test #12 LinkedQueue is_empty (false) (2 points)
+------
+pass
+
+Test #13 ArrayStack is_full (false) (2 points)
+------
+pass
+
+Test #14 LinkedStack is_full (false) (2 points)
+------
+pass
+
+Test #15 ArrayQueue is_full (false) (2 points)
+------
+pass
+
+Test #16 LinkedQueue is_full (false) (2 points)
+------
+pass
+
+Test #17 ArrayStack Underflow Exception (5 points)
+------
+pass
+
+Test #18 LinkedStack Underflow Exception (5 points)
+------
+pass
+
+Test #19 ArrayQueue Underflow Exception (5 points)
+------
+pass
+
+Test #20 LinkedQueue Underflow Exception (5 points)
+------
+pass
+
+Test #21 ArayStack fill_all / empty_all (10 points)
+------
+pass
+
+Test #22 LinkedStack fill_all / empty_all (10 points)
+------
+pass
+
+Test #23 ArayQueue fill_all / empty_all (10 points)
+------
+pass
+
+Test #24 LinkedQueue fill_all / empty_all (10 points)
+------
+pass
+
+Total Score: 100
+

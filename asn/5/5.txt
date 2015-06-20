@@ -1,0 +1,21 @@
+Assignment: a.out
+Username:   5
+
+Test #1 Default Constructor (5 points)
+------
+Test error
+
+Test #2 Copy Constructor (empty tree) (5 points)
+------
+Test error
+
+Test #3 Copy Constructor (filled tree) (5 points)
+------
+Test error
+
+Test #4 Destructor (5 points)
+------
+Test error
+
+Test #5 Assignment Operator (empty tree) (5 points)
+------
